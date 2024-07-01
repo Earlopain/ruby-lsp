@@ -270,6 +270,10 @@ module RubyIndexer
       DeclarationListener.new(self, dispatcher, result, indexable_path.full_path)
       dispatcher.dispatch(result.value)
 
+      RubyLsp::Addon.addons.each do |addon|
+        addon.index_single(self, result, indexable_path.full_path)
+      end
+
       require_path = indexable_path.require_path
       @require_paths_tree.insert(require_path, indexable_path) if require_path
     rescue Errno::EISDIR, Errno::ENOENT

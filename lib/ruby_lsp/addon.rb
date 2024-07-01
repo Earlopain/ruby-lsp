@@ -187,5 +187,8 @@ module RubyLsp
       ).void
     end
     def create_completion_listener(response_builder, node_context, dispatcher, uri); end
+
+    sig { params(index: RubyIndexer::Index, parse_result: Prism::ParseResult, file_path: String).void }
+    def index_single(index, parse_result, file_path); end
   end
 end

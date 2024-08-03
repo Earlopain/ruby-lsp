@@ -118,10 +118,9 @@ module RubyLsp
               backtrace: e.backtrace&.join("\n"),
             },
           ))
+          $stderr.puts("Error processing #{message[:method]}: #{e.full_message}")
         end
       end
-
-      $stderr.puts("Error processing #{message[:method]}: #{e.full_message}")
     end
 
     sig { void }

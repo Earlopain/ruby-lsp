@@ -238,4 +238,12 @@ class StoreTest < Minitest::Test
       @store.get(URI("untitled:Untitled-1"))
     end
   end
+
+  def test_raises_non_existing_document_error_for_virtual_documents
+    uri =
+      "sorbet:https%3A//github.com/sorbet/sorbet/tree/090ed6096a83dd7a5fe52bd3f9338c1eca5178eb/rbi/core/constants.rbi"
+    assert_raises(RubyLsp::Store::NonExistingDocumentError) do
+      @store.get(URI(uri))
+    end
+  end
 end

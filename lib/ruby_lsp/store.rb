@@ -38,8 +38,9 @@ module RubyLsp
       document = @state[uri.to_s]
       return document unless document.nil?
 
-      # For unsaved files (`untitled:Untitled-1` uris), there's no path to read from. If we don't have the untitled file
-      # already present in the store, then we have to raise non existing document error
+      # For unsaved files (`untitled:Untitled-1` uris) or virtual documents (extension-contributed schemes), there's no
+      # path to read from. If we don't have the untitled file already present in the store, then we have to raise
+      # non existing document error
       path = uri.to_standardized_path
       raise NonExistingDocumentError, uri.to_s unless path
 
